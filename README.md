@@ -11,11 +11,18 @@
 
 -   Camera Orientation: Side View
 -   Camera Movement: Mixed
-    1. Tracking when progressing
+    1. Tracking when progressing towards the level end
     2. Fixed when facing the boss
 -   Player Health: Healthbar
--   End Condition: Survive enough time and win the boss fight, OR lose all health
--   Scoring: Hitting / defeating enemies, collecting items. 
+-   End Condition: Survive enough time and win the boss fight (finale), OR lose all health
+-   Scoring: Hitting / defeating enemies, collecting items.
+
+[!]The player must have a set interaction with the edges of the screen.
+It is up to you what the interaction is but must be documented in your README file.
+Warp, Stop, and Camera Follow(??) are just a few of the options you could choose.
+
+[!]There must be a delay between bullets fired so that each bullet is clearly distinguishable from the others.
+Your solution must be documented in the README file.
 
 ### Game Description
 
@@ -27,12 +34,16 @@ Be brave, my soldier! The whole life of mankind relies on you.
 
 ### Controls
 
+The player can move around to dodge enemy fire and/or collect items, shoot bullets to neutralize enemies.
 -   Movement
-    -   Up: W
+    -   Up / Jump: W
     -   Down: S
     -   Left: A
     -   Right: D
--   Fire: Left Click
+-   Fire: Left Click / Auto
+
+### Enemy Design
+[!] A short description of each enemy type must be documented in your README file.
 
 ## You Additions
 
