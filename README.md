@@ -26,8 +26,6 @@ Your solution must be documented in the README file.
 
 ### Game Description
 
-*The game has some inspiration from Neon Genesis Evangelion.*
-
 The 19th Angel, Future has come and is dealing threat. Unlike all angels before, it can spawn numerous minions to spread horror. The more fear it collects, the more powerful Future and all its family become. Your mecha can switch between two specialized modes: air and ground to handle different types of enemies. However, the air mode is more powerful and thus requires energy cores to maintain. That means you must fight with Future in the air once you reach it.
 
 Be brave, my soldier! The whole life of mankind relies on you.
@@ -41,6 +39,13 @@ The player can move around to dodge enemy fire and/or collect items, shoot bulle
     -   Left: A
     -   Right: D
 -   Fire: Left Click / Auto
+
+### Inspirations
+
+_The background story is based on Neon Genesis Evangelion, however it's not well thought and is subject to change_
+
+_The gameplay was inspired by Viking from StarCraft II, a unit which can switch from fighter (air) mode and assault (ground) mode._
+- Since we're going to make a shmup game, why not combine the conventional side scrollers of an aircraft and of a gunner?
 
 ### Enemy Design
 [!] A short description of each enemy type must be documented in your README file.
