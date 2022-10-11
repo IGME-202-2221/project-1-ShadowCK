@@ -47,6 +47,23 @@ public class Game : MonoBehaviour
                 top = cameraPos.y + totalCamHeight / 2;
             }
         }
+
+        /// <summary>
+        /// Returns a Vector2 for the orthographic box of the camera
+        /// </summary>
+        /// <param name="camera"></param>
+        /// <returns></returns>
+        public static Vector2 OrthographicBox(Camera camera)
+        {
+            float totalCamHeight = camera.orthographicSize * 2f;
+            float totalCamWidth = totalCamHeight * camera.aspect;
+            return new Vector2(totalCamWidth, totalCamHeight);
+        }
+
+        public static Bounds OrthographicBounds(Camera camera)
+        {
+            return new Bounds(camera.transform.position, OrthographicBox(camera));
+        }
     }
 
     public CameraSettings mainCamera;

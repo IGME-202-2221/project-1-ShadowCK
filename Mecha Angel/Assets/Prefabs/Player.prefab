@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4124240114506949414}
   - component: {fileID: 97119441}
   - component: {fileID: 1647442192}
+  - component: {fileID: 797749492}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -100,7 +101,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  health: 100
+  maxHealth: 100
   cameraObject: {fileID: 0}
+  mode: 0
 --- !u!114 &97119441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,19 +147,11 @@ MonoBehaviour:
     m_ActionId: 022b1893-96bd-4eaf-b9ae-f44188d7acad
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 7ef0154c-6e4d-48ec-b07c-09146f7bd918
-    m_ActionName: Player/Look[/Mouse/delta,/Pen/delta]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 0355a979-0852-4a8b-92a0-4b4ba7e7bc3f
-    m_ActionName: Player/Fire[/Mouse/leftButton]
-  - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CollisionManager, Assembly-CSharp
-        m_MethodName: ChangeCollisionMode
-        m_Mode: 1
+      - m_Target: {fileID: 4124240114506949414}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnFire
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -164,8 +160,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 9f83685d-602d-43ec-8a25-64766aa12ae8
-    m_ActionName: Player/ChangeCollisionMode[/Mouse/leftButton]
+    m_ActionId: 0355a979-0852-4a8b-92a0-4b4ba7e7bc3f
+    m_ActionName: Player/Fire[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -188,3 +184,23 @@ MonoBehaviour:
   bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
+--- !u!114 &797749492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4124240114506949413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825dcd6c2b18abe418c68b2da7767dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayer: 0
+  p_canShoot: 0
+  p_isShooting: 0
+  shootTimer: 0.2
+  shootInterval: 0.2
+  bulletDamage: 10
+  bulletSpeed: 20
+  bulletColor: {r: 1, g: 1, b: 1, a: 1}

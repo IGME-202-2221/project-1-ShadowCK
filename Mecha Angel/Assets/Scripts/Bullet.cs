@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Bullet : LivingEntity
 {
@@ -28,10 +29,12 @@ public class Bullet : LivingEntity
 
     public static Bullet Instantiate(Vector3 position, Vector3 direction, float bulletDamage, float bulletSpeed, Color bulletColor)
     {
-        Bullet bullet = Instantiate(Game.Instance.bulletPrefab, position, Quaternion.identity).GetComponent<Bullet>();
+        // Note that Vector2.up is the sprite orientation (where it faces) which Unity doesn't have an AI to tell.
+        Quaternion rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, direction));
+        Bullet bullet = Instantiate(Game.Instance.bulletPrefab, position, rotation).GetComponent<Bullet>();
         bullet.bulletDamage = bulletDamage;
         bullet.speed = bulletSpeed;
-        bullet.direction = direction;
+        bullet.Direction = direction;
         bullet.bulletColor = bulletColor;
         bullet.SetHealth(1f, 1f);
         return bullet;

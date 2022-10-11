@@ -63,7 +63,10 @@ _List out what you added to your game to make it different for you_
 
 -   _List all project sources here –models, textures, sound clips, assets, etc._
 -   _If an asset is from the Unity store, include a link to the page and the author’s name_
-1. https://www.kenney.nl/assets/space-shooter-extension
+1. Kenney® - Space Shooter Extension
+https://www.kenney.nl/assets/space-shooter-extension
+2. DinV Studio - Dynamic Space Background Lite
+https://assetstore.unity.com/packages/2d/textures-materials/dynamic-space-background-lite-104606 
 
 ## Known Issues
 

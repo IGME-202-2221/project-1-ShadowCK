@@ -9,7 +9,7 @@ using static UnityEngine.GraphicsBuffer;
 public class Shooter : MonoBehaviour
 {
     public bool isPlayer = false;
-    // This field is for Player
+    // Fields for Player
     public bool p_canShoot = false;
     public bool p_isShooting = false;
 
@@ -17,7 +17,7 @@ public class Shooter : MonoBehaviour
     public float shootInterval = 1f;
 
     public float bulletDamage = 10f;
-    public float bulletSpeed = 5f;
+    public float bulletSpeed = 10f;
     public Color bulletColor = Color.white;
 
     private void Start()
@@ -66,7 +66,8 @@ public class Shooter : MonoBehaviour
         shootTimer = shootInterval;
         // Generates the bullet
         Vector3 position = transform.position;
-        Vector3 direction = targetPosition - position;
+        // Do NOT count z in direction!
+        Vector2 direction = targetPosition - position;
         Bullet.Instantiate(position, direction, this);
     }
 }

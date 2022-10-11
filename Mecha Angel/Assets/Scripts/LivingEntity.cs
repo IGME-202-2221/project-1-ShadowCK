@@ -21,6 +21,37 @@ public class LivingEntity : MonoBehaviour
     protected Vector3 direction;
     protected Vector3 velocity;
 
+    public float Health
+    {
+        get => health;
+        set => health = value;
+    }
+
+    public float MaxHealth
+    {
+        get => maxHealth;
+        set => maxHealth = value;
+    }
+
+    /// <summary>
+    /// The property helps normalize direction on both get and set
+    /// </summary>
+    public Vector3 Direction
+    {
+        get
+        {
+            if (direction.sqrMagnitude != 1.0f)
+            {
+                direction = direction.normalized;
+            }
+            return direction;
+        }
+        set
+        {
+            direction = value.normalized;
+        }
+    }
+
     [SerializeField]
     protected Camera cameraObject;
 
@@ -40,6 +71,11 @@ public class LivingEntity : MonoBehaviour
         transform.position = position;
     }
 
+    /// <summary>
+    /// Saves time from calling Health and MaxHealth separately
+    /// </summary>
+    /// <param name="health"></param>
+    /// <param name="maxHealth"></param>
     public void SetHealth(float health, float maxHealth)
     {
         this.health = health;

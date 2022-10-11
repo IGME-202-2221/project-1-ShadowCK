@@ -24,6 +24,7 @@ public class CollisionManager : MonoBehaviour
 
         UpdateModeInfo();
         // Add all objects in the current scene into the list
+        // Doesn't take care of objects instantiated later - use Register() to do so
         foreach (var obj in FindObjectsOfType<GameObject>())
         {
             CollidableObject collidable = obj.GetComponent<CollidableObject>();
@@ -86,5 +87,30 @@ public class CollisionManager : MonoBehaviour
     {
         string mode = isUsingCircleCollision ? "Circle" : "AABB";
         modeInfo.text = $"Collision Mode: {mode}";
+    }
+
+    public void Register(CollidableObject collidable)
+    {
+        collidableObjects.Add(collidable);
+    }
+
+    public bool HasRegistered(CollidableObject collidable)
+    {
+        return collidableObjects.Contains(collidable);
+    }
+
+    /// <summary>
+    /// Tries to register the collidable into the list
+    /// </summary>
+    /// <param name="collidable"> collidable object </param>
+    /// <returns> Returns true if the object is registered by this function; false if already exists </returns>
+    public bool TryRegister(CollidableObject collidable)
+    {
+        if (!HasRegistered(collidable))
+        {
+            Register(collidable);
+            return true;
+        }
+        return false;
     }
 }
