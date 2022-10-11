@@ -50,11 +50,6 @@ public class CollidableObject : MonoBehaviour
         {
             sprite.color = Color.white;
         }
-
-        if (name.Contains("tation"))
-        {
-            Debug.Log($"{bounds.size}");
-        }
     }
 
     public void RegisterCollision(CollidableObject other)
