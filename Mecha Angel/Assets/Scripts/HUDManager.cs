@@ -6,15 +6,54 @@ using UnityEngine.UI;
 public class HUDManager : MonoBehaviour
 {
     [SerializeField]
-    Text scoreLabel;
+    private Text scoreLabel;
 
-    [SerializeField]
-    Slider healthBar;
+    public static HUDManager instance;
 
-    // Update is called once per frame
-    void Update()
+    public List<DynamicSlider> sliders;
+
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+        else Destroy(gameObject);
+
+        foreach (var obj in FindObjectsOfType<GameObject>())
+        {
+            DynamicSlider slider = obj.GetComponent<DynamicSlider>();
+            if (slider != null)
+            {
+                sliders.Add(slider);
+            }
+        }
+    }
+
+    private void Update()
     {
         scoreLabel.text = "Score: " + Game.Instance.score;
-        healthBar.value = Game.Instance.Player.HealthPercent;
+
+        Player player = Game.Instance.Player;
+        foreach (DynamicSlider slider in sliders)
+        {
+            switch (slider.name)
+            {
+                case "HealthBar":
+                    Debug.Log($"{slider.name} passes");
+                    slider.UpdateValue(player.Health, player.MaxHealth);
+                    break;
+                // TODO
+                case "ManaBar":
+                    break;
+            }
+        }
+    }
+
+    public bool RegisterSlider(DynamicSlider slider)
+    {
+        if (!sliders.Contains(slider))
+        {
+            sliders.Add(slider);
+            return true;
+        }
+        return false;
     }
 }

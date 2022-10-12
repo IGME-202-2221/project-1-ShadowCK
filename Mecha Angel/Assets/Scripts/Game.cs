@@ -82,6 +82,7 @@ public class Game : MonoBehaviour
         {
             Instance = this;
             // Initializes basic game data
+            Application.targetFrameRate = 144;
             Player = GetComponent<Player>("Player");
             mainCamera = new CameraSettings();
         }
