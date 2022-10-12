@@ -68,6 +68,11 @@ public class CollidableObject : MonoBehaviour, ISprite
         }
     }
 
+    private void OnDestroy()
+    {
+        CollisionManager.instance.UnRegister(this);
+    }
+
     public void RegisterCollision(CollidableObject other)
     {
         isCurrentlyColliding = true;

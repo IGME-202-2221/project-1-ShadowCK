@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class CollisionManager : MonoBehaviour
 {
@@ -66,6 +68,12 @@ public class CollisionManager : MonoBehaviour
                 }
             }
         }
+
+        // Process all collisions
+        foreach (CollidableObject collidable in collidableObjects)
+        {
+            ProcessCollisions(collidable);
+        }
     }
     private bool AABBCollision(CollidableObject objectA, CollidableObject objectB)
     {
@@ -94,6 +102,15 @@ public class CollisionManager : MonoBehaviour
         collidableObjects.Add(collidable);
     }
 
+    /// <summary>
+    /// Removes the collidable from the list
+    /// </summary>
+    /// <param name="collidable"> object to remove </param>
+    public void UnRegister(CollidableObject collidable)
+    {
+        collidableObjects.Remove(collidable);
+    }
+
     public bool HasRegistered(CollidableObject collidable)
     {
         return collidableObjects.Contains(collidable);
@@ -109,6 +126,52 @@ public class CollisionManager : MonoBehaviour
         if (!HasRegistered(collidable))
         {
             Register(collidable);
+            return true;
+        }
+        return false;
+    }
+
+    public void ProcessCollisions(CollidableObject collidable)
+    {
+        foreach (CollidableObject other in collidable.collisions)
+        {
+            // A technique for shortening a bunch of if-remove-continues. The bool here has no other use.
+            bool worked =
+                Bullet_LivingEntity(collidable, other)
+                // Swaps sides and checks again for every A-B collision type
+                || Bullet_LivingEntity(other, collidable)
+                || LivingEntity_LivingEntity(collidable, other);
+            // Whether a collision was performed or not, remove the collision so it won't get double processed
+            other.collisions.Remove(collidable);
+            // collidable's collisions get reset every Update(), no need to repeat
+        }
+    }
+
+    private bool Bullet_LivingEntity(CollidableObject collider, CollidableObject other)
+    {
+        Bullet bullet = collider.GetComponent<Bullet>();
+        LivingEntity entity = other.GetComponent<LivingEntity>();
+        Shooter entityShooter = other.GetComponent<Shooter>();
+
+        if (bullet != null && entity != null)
+        {
+            if (!bullet.IsDead && entity is not Bullet && entityShooter != bullet.parent)
+            {
+                entity.TakeDamage(bullet.bulletDamage);
+                bullet.Die();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private bool LivingEntity_LivingEntity(CollidableObject collider, CollidableObject other)
+    {
+        LivingEntity colliderEntity = collider.GetComponent<LivingEntity>();
+        LivingEntity otherEntity = other.GetComponent<LivingEntity>();
+        if (colliderEntity != null && otherEntity != null)
+        {
+            // TODO: Pushes other by applying a force
             return true;
         }
         return false;
