@@ -37,7 +37,6 @@ public class HUDManager : MonoBehaviour
             switch (slider.name)
             {
                 case "HealthBar":
-                    Debug.Log($"{slider.name} passes");
                     slider.UpdateValue(player.Health, player.MaxHealth);
                     break;
                 // TODO

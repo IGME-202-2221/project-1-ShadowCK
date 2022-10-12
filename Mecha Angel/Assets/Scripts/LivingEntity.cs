@@ -38,6 +38,11 @@ public class LivingEntity : MonoBehaviour
         get => health / maxHealth;
     }
 
+    public bool IsDead
+    {
+        get => health <= 0;
+    }
+
     /// <summary>
     /// The property helps normalize direction on both get and set
     /// </summary>
@@ -83,7 +88,33 @@ public class LivingEntity : MonoBehaviour
     /// <param name="maxHealth"></param>
     public void SetHealth(float health, float maxHealth)
     {
-        this.health = health;
         this.maxHealth = maxHealth;
+        this.health = health;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        // Dead entities needn't take more damage
+        if (IsDead)
+        {
+            return;
+        }
+
+        health -= damage;
+        if (health < 0) health = 0;
+        if (health == 0)
+        {
+            Die();
+        }
+    }
+
+    public virtual void Die()
+    {
+        health = 0;
+        foreach (MonoBehaviour component in GetComponents<MonoBehaviour>())
+        {
+            component.enabled = false;
+        }
+        Destroy(gameObject, 0.1f);
     }
 }
