@@ -33,6 +33,11 @@ public class LivingEntity : MonoBehaviour
         set => maxHealth = value;
     }
 
+    public float HealthPercent
+    {
+        get => health / maxHealth;
+    }
+
     /// <summary>
     /// The property helps normalize direction on both get and set
     /// </summary>

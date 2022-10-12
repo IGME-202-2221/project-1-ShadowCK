@@ -119,7 +119,7 @@ public class CollidableObject : MonoBehaviour, ISprite
 
     private void OnDrawGizmos()
     {
-        if (!Application.isPlaying) return;
+        if (!Application.isPlaying || CollisionManager.instance == null) return;
         if (isCurrentlyColliding)
         {
             Gizmos.color = Color.red;

@@ -137,6 +137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  health: 100
-  maxHealth: 100
+  health: 50
+  maxHealth: 50
   cameraObject: {fileID: 0}

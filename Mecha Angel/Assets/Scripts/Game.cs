@@ -9,6 +9,9 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class Game : MonoBehaviour
 {
+    public float score = 0;
+
+    // Prefabs and presets
     public GameObject bulletPrefab;
 
     public static Game Instance
