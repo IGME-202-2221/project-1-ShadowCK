@@ -25,11 +25,7 @@ public class Player : LivingEntity
     protected override void Update()
     {
         // Updates position based on velocity and deltaTime
-        velocity = direction * speed;
-        Vector3 displacement = velocity * Time.deltaTime;
-        position += displacement;
-        WrapPosition();
-        transform.position = position;
+        base.Update();
 
         // Shoots bullet
         // fire to the mouse position
@@ -70,7 +66,7 @@ public class Player : LivingEntity
     /// <summary>
     /// Wraps the player's position if he's out of bounds
     /// </summary>
-    private void WrapPosition()
+    protected override void WrapPosition()
     {
         // Get the camera's height
         float totalCamHeight = cameraObject.orthographicSize * 2f;

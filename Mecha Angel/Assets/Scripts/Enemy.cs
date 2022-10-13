@@ -15,11 +15,9 @@ public class Enemy : LivingEntity
     protected override void Update()
     {
         // Updates direction, following player
-        Direction = Game.Instance.Player.transform.position - position;
+        direction = (Game.Instance.Player.transform.position - position).normalized;
+
         // Updates position based on velocity and deltaTime
-        velocity = direction * speed;
-        Vector3 displacement = velocity * Time.deltaTime;
-        position += displacement;
-        transform.position = position;
+        base.Update();
     }
 }

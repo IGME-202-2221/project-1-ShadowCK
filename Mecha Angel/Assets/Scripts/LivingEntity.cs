@@ -16,7 +16,6 @@ public class LivingEntity : MonoBehaviour
     [SerializeField]
     protected float maxHealth = 100f;
 
-    // The "position" field prevents modifications to the transform
     protected Vector3 position;
     protected Vector3 direction;
     protected Vector3 velocity;
@@ -74,10 +73,13 @@ public class LivingEntity : MonoBehaviour
 
     protected virtual void Update()
     {
+        position = transform.position;
+
         // Updates position based on velocity and deltaTime
         velocity = direction * speed;
         Vector3 displacement = velocity * Time.deltaTime;
         position += displacement;
+
         transform.position = position;
     }
 
@@ -116,5 +118,10 @@ public class LivingEntity : MonoBehaviour
             component.enabled = false;
         }
         Destroy(gameObject, 0.1f);
+    }
+
+    protected virtual void WrapPosition()
+    {
+        // Does nothing
     }
 }
