@@ -57,15 +57,16 @@ public class CollidableObject : MonoBehaviour, ISprite
         // Update the bounds every frame because it's a struct (value type)
         bounds = sprite.bounds;
 
-        // If I'm currently colliding, turn me red.
-        if (isCurrentlyColliding)
-        {
-            sprite.color = Color.red;
-        }
-        else
-        {
-            sprite.color = Color.white;
-        }
+        // TODO: This is not necessary
+        //// If I'm currently colliding, turn me red.
+        //if (isCurrentlyColliding)
+        //{
+        //    sprite.color = Color.red;
+        //}
+        //else
+        //{
+        //    sprite.color = Color.white;
+        //}
     }
 
     private void OnDestroy()

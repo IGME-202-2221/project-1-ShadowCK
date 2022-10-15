@@ -10,12 +10,16 @@ public class Shooter : MonoBehaviour
 {
     public bool isPlayer = false;
     // Fields for Player
+    [HideInInspector]
     public bool p_canShoot = false;
+    [HideInInspector]
     public bool p_isShooting = false;
 
     public float shootTimer = 1f;
     public float shootInterval = 1f;
 
+    public int bulletsPerShot = 1;
+    public float bulletsSpread = 30f;
     public float bulletDamage = 10f;
     public float bulletSpeed = 10f;
     public Color bulletColor = Color.white;
@@ -68,6 +72,22 @@ public class Shooter : MonoBehaviour
         Vector3 position = transform.position;
         // Do NOT count z in direction!
         Vector2 direction = targetPosition - position;
-        Bullet.Instantiate(position, direction, this);
+        // Shoots one bullet
+        if (bulletsPerShot == 1)
+        {
+            Bullet.Instantiate(position, direction, this);
+        }
+        // Shoots multiple bullets
+        else
+        {
+            float startAngle = bulletsSpread / 2;
+            float stepAngle = -bulletsSpread / bulletsPerShot;
+            direction = Quaternion.Euler(0, 0, startAngle) * direction;
+            for (int i = 0; i < bulletsPerShot; i++)
+            {
+                Bullet.Instantiate(position, direction, this);
+                direction = Quaternion.Euler(0, 0, stepAngle) * direction;
+            }
+        }
     }
 }

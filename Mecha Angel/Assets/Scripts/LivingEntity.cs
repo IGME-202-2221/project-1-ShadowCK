@@ -20,6 +20,12 @@ public class LivingEntity : MonoBehaviour
     protected Vector3 direction;
     protected Vector3 velocity;
 
+    private SpriteRenderer sprite;
+    public SpriteRenderer Sprite => sprite;
+
+    private Coroutine hurtRoutine;
+    private Coroutine deathRoutine;
+
     public float Health
     {
         get => health;
@@ -66,6 +72,8 @@ public class LivingEntity : MonoBehaviour
 
     protected virtual void Awake()
     {
+        sprite = GetComponent<SpriteRenderer>();
+
         position = transform.position;
         direction = Vector3.zero;
         cameraObject = Camera.main;
@@ -108,6 +116,11 @@ public class LivingEntity : MonoBehaviour
         {
             Die();
         }
+        // Health > 0, Hurts
+        else
+        {
+            hurtRoutine ??= StartCoroutine(HurtRadient(0.2f));
+        }
     }
 
     public virtual void Die()
@@ -117,11 +130,50 @@ public class LivingEntity : MonoBehaviour
         {
             component.enabled = false;
         }
-        Destroy(gameObject, 0.1f);
+        deathRoutine ??= StartCoroutine(DeathGradient(0.5f));
+        Destroy(gameObject, 0.5f);
     }
 
     protected virtual void WrapPosition()
     {
-        // Does nothing
+        // Does nothing by default
+    }
+
+    private IEnumerator HurtRadient(float duration)
+    {
+        Color color = sprite.material.color;
+
+        float red = color.r;
+        float green = color.g;
+        float blue = color.b;
+        color.r = 1f;
+        color.g = 0f;
+        color.b = 0f;
+        float step = 1f / duration;
+        // TODO: The gradient has some precision errors
+        for (float progress = 0; progress <= 1f; progress += Time.deltaTime * step)
+        {
+            color.r = 1f - (1f - red) * progress;
+            color.g = progress * green;
+            color.b = progress * blue;
+            sprite.material.color = color;
+            //Debug.Log(color);
+            //Debug.Log(progress);
+            yield return null;
+        }
+        hurtRoutine = null;
+    }
+
+    private IEnumerator DeathGradient(float duration)
+    {
+        Color color = sprite.material.color;
+        float step = 1 / duration;
+        for (float alpha = 1f; alpha >= 0; alpha -= Time.deltaTime * step)
+        {
+            color.a = alpha;
+            sprite.material.color = color;
+            yield return null;
+        }
+        deathRoutine = null;
     }
 }

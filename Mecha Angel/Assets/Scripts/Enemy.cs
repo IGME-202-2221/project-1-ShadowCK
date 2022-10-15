@@ -20,4 +20,11 @@ public class Enemy : LivingEntity
         // Updates position based on velocity and deltaTime
         base.Update();
     }
+
+    public override void Die()
+    {
+        // Enemies give score to the player on death
+        Game.Instance.score += maxHealth;
+        base.Die();
+    }
 }

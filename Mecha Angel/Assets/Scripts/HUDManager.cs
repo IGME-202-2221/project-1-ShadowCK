@@ -41,6 +41,7 @@ public class HUDManager : MonoBehaviour
                     break;
                 // TODO
                 case "ManaBar":
+                    slider.UpdateValue(player.Mana, player.MaxMana);
                     break;
             }
         }

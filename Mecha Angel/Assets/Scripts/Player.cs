@@ -7,6 +7,9 @@ public class Player : LivingEntity
 {
     private Shooter shooter;
 
+    protected float mana = 100f;
+    protected float maxMana = 100f;
+
     public enum CombatMode
     {
         Air,
@@ -14,6 +17,18 @@ public class Player : LivingEntity
     }
 
     public CombatMode mode = CombatMode.Ground;
+
+    public float Mana
+    {
+        get => mana;
+        set => mana = value;
+    }
+
+    public float MaxMana
+    {
+        get => maxMana;
+        set => maxMana = value;
+    }
 
     protected override void Awake()
     {

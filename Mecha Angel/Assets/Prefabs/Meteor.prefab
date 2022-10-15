@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2569622113833298980}
   - component: {fileID: 2569622113833298981}
   - component: {fileID: 7713496081707559141}
+  - component: {fileID: 584938822}
   m_Layer: 0
   m_Name: Meteor
   m_TagString: Untagged
@@ -99,3 +100,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCurrentlyColliding: 0
   collisions: []
+  bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+--- !u!114 &584938822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2569622113833298982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f278057d10154c04da264cba87c6cf7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  health: 30
+  maxHealth: 30
+  cameraObject: {fileID: 0}
+  disorientDegrees: 30
+  disorientInterval: 2
+  disorientDuration: 0.3

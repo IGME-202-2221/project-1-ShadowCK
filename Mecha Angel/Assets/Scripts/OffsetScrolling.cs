@@ -30,8 +30,8 @@ public class OffsetScrolling : MonoBehaviour
         previousScrollSpeed = scrollSpeed;
         // Updates scrollSpeed based on player's health (the lower the higher)
         Player player = Game.Instance.Player;
-        // Maps HP/maxHP (0~1) to 2~0.1
-        scrollSpeed = (float)math.lerp(2, 0.1, Mathf.InverseLerp(0, player.MaxHealth, player.Health));
+        // Maps HP/maxHP (0~1) to 0.5~0.1
+        scrollSpeed = (float)math.lerp(0.5, 0.1, Mathf.InverseLerp(0, player.MaxHealth, player.Health));
         // Keeps scrolling progress by changing timer's value; otherwise there will be an offeset every time the speed changes
         if (scrollSpeed != previousScrollSpeed)
         {

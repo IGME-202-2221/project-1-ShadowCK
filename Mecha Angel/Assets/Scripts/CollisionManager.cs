@@ -151,7 +151,7 @@ public class CollisionManager : MonoBehaviour
     {
         Bullet bullet = collider.GetComponent<Bullet>();
         LivingEntity entity = other.GetComponent<LivingEntity>();
-        Shooter entityShooter = other.GetComponent<Shooter>();
+        Shooter entityShooter = other.GetComponent<Shooter>(); // Can be null
 
         if (bullet != null && entity != null)
         {
@@ -159,6 +159,11 @@ public class CollisionManager : MonoBehaviour
             {
                 entity.TakeDamage(bullet.bulletDamage);
                 bullet.Die();
+                // Player's bullet hits meteor, awards score
+                if (bullet.parent.GetComponent<Player>() != null && entity is Meteor)
+                {
+                    Game.Instance.score += 1;
+                }
             }
             return true;
         }

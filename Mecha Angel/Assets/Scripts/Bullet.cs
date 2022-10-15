@@ -22,7 +22,7 @@ public class Bullet : LivingEntity
         // If out of bounds, destroy after 0.5s
         if (Game.IsOutOfBounds(this, Game.Instance.mainCamera))
         {
-            Destroy(gameObject, 0.5f);
+            Destroy(gameObject, 0.1f);
         }
     }
 
