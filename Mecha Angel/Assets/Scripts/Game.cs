@@ -13,6 +13,9 @@ public class Game : MonoBehaviour
 
     // Prefabs and presets
     public GameObject bulletPrefab;
+    public GameObject missilePrefab;
+
+    public TextMesh info;
 
     public static Game Instance
     {
@@ -27,7 +30,7 @@ public class Game : MonoBehaviour
     public class CameraSettings
     {
         public Camera instance;
-        public float left, right, top, bottom;
+        public float width, height, left, right, top, bottom;
 
         public CameraSettings()
         {
@@ -42,6 +45,8 @@ public class Game : MonoBehaviour
                 float totalCamHeight = instance.orthographicSize * 2f;
                 // Calculate the camera's width (must be calculated)
                 float totalCamWidth = totalCamHeight * instance.aspect;
+                width = totalCamWidth;
+                height = totalCamHeight;
                 // Get all the bounds' coordinates.
                 Vector3 cameraPos = instance.transform.position;
                 left = cameraPos.x - totalCamWidth / 2;
@@ -133,5 +138,17 @@ public class Game : MonoBehaviour
     {
         Vector3 objPos = obj.transform.position;
         return objPos.x < camera.left || objPos.x > camera.right || objPos.y < camera.bottom || objPos.y > camera.top;
+    }
+
+    public void GameOver()
+    {
+        // TODO: Has some error
+        //List<CollidableObject> collidables = CollisionManager.instance.collidableObjects;
+        //for (int i = 0; i < collidables.Count; i++)
+        //{
+        //    DestroyImmediate(collidables[i]);
+        //}
+        //DestroyImmediate(CollisionManager.instance);
+        info.text = "Game Over!";
     }
 }

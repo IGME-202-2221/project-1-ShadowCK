@@ -16,7 +16,10 @@ public class LivingEntity : MonoBehaviour
     [SerializeField]
     protected float maxHealth = 100f;
 
+    protected bool destroyFlag = false;
+
     protected Vector3 position;
+    [SerializeField]
     protected Vector3 direction;
     protected Vector3 velocity;
 
@@ -28,8 +31,8 @@ public class LivingEntity : MonoBehaviour
 
     public float Health
     {
-        get => health;
-        set => health = value;
+        get => Mathf.Clamp(health, 0, maxHealth);
+        set => health = Mathf.Clamp(value, 0, maxHealth);
     }
 
     public float MaxHealth
@@ -87,7 +90,7 @@ public class LivingEntity : MonoBehaviour
         velocity = direction * speed;
         Vector3 displacement = velocity * Time.deltaTime;
         position += displacement;
-
+        WrapPosition();
         transform.position = position;
     }
 
@@ -109,6 +112,7 @@ public class LivingEntity : MonoBehaviour
         {
             return;
         }
+        Debug.Log($"{name} took {damage} damage");
 
         health -= damage;
         if (health < 0) health = 0;
@@ -175,5 +179,22 @@ public class LivingEntity : MonoBehaviour
             yield return null;
         }
         deathRoutine = null;
+    }
+
+    public static bool IsEnemy(LivingEntity attacker, LivingEntity attacked)
+    {
+        if (attacker == null || attacked == null)
+        {
+            return false;
+        }
+        if (attacker == attacked)
+        {
+            return false;
+        }
+        if (attacker.GetType() == attacked.GetType())
+        {
+            return false;
+        }
+        return true;
     }
 }

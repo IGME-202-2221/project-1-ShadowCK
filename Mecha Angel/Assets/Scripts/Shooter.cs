@@ -1,20 +1,36 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 /// <summary>
-/// An entity that shoots bullets
+/// An entity that shoots bullets.
 /// </summary>
 public class Shooter : MonoBehaviour
 {
+    // Player Fields
+    [HideInInspector]
     public bool isPlayer = false;
-    // Fields for Player
     [HideInInspector]
     public bool p_canShoot = false;
     [HideInInspector]
     public bool p_isShooting = false;
 
+    // Enemy Fields
+    [SerializeField]
+    protected ShootMode shootMode = ShootMode.AlwaysTargetPlayer;
+    protected enum ShootMode
+    {
+        AlwaysTargetPlayer,
+        UseShootDirection,
+        UseFaceDirection
+    }
+    [SerializeField]
+    protected Vector3 shootDirection = Vector3.zero;
+
+    // Others
     public float shootTimer = 1f;
     public float shootInterval = 1f;
 
@@ -24,6 +40,13 @@ public class Shooter : MonoBehaviour
     public float bulletSpeed = 10f;
     public Color bulletColor = Color.white;
 
+    [Header("Tracking")]
+    [Tooltip("Fires a missile that tracks the target instead of a bullet.")]
+    public bool trackingBullets = false;
+    [Tooltip("Sets the \"turning-rate\" of the missile. Lower value makes faster turns.")]
+    public float trackInertia = 1f;
+
+
     private void Start()
     {
         isPlayer = GetComponent<Player>() != null;
@@ -32,6 +55,38 @@ public class Shooter : MonoBehaviour
 
     private void Update()
     {
+        // Player upgrades
+        if (isPlayer)
+        {
+            float score = Game.Instance.score;
+            if (score > 100)
+            {
+                bulletsPerShot = 1;
+                bulletDamage = 12;
+            }
+            if (score > 200)
+            {
+                shootInterval = 0.18f;
+            }
+            if (score > 400)
+            {
+                bulletsPerShot = 2;
+            }
+            if (score > 600)
+            {
+                shootInterval = 0.15f;
+                bulletSpeed = 30;
+            }
+            if (score > 800)
+            {
+                bulletsPerShot = 3;
+                bulletsSpread = 45f;
+            }
+            if (score > 1000)
+            {
+                bulletDamage = 15;
+            }
+        }
         if (shootTimer > 0)
         {
             shootTimer -= Time.deltaTime;
@@ -43,10 +98,22 @@ public class Shooter : MonoBehaviour
             {
                 p_canShoot = true;
             }
-            // NPC shoots a bullet to the player
+            // NPC shoots a bullet to the player or a direction
             else
             {
-                Shoot(Game.Instance.Player);
+                if (shootMode == ShootMode.AlwaysTargetPlayer)
+                {
+                    Shoot(Game.Instance.Player);
+                }
+                else if (shootMode == ShootMode.UseShootDirection)
+                {
+                    Shoot(transform.position + shootDirection);
+                }
+                else if (shootMode == ShootMode.UseFaceDirection)
+                {
+                    Quaternion rotation = transform.rotation;
+                    Shoot(transform.position + rotation * Vector2.up);
+                }
             }
         }
     }
@@ -57,14 +124,14 @@ public class Shooter : MonoBehaviour
     /// <param name="target"> target to fire the bullet to </param>
     public void Shoot(LivingEntity target)
     {
-        Shoot(target.transform.position);
+        Shoot(target.transform.position, target);
     }
 
     /// <summary>
     /// Shoots a bullet towards a position
     /// </summary>
     /// <param name="targetPosition"> where to fire the bullet to </param>
-    public void Shoot(Vector3 targetPosition)
+    public void Shoot(Vector3 targetPosition, LivingEntity target = null)
     {
         // Resets the shoot Timer
         shootTimer = shootInterval;
@@ -75,7 +142,14 @@ public class Shooter : MonoBehaviour
         // Shoots one bullet
         if (bulletsPerShot == 1)
         {
-            Bullet.Instantiate(position, direction, this);
+            if (trackingBullets)
+            {
+                Missile.Instantiate(position, direction, this, trackInertia, target);
+            }
+            else
+            {
+                Bullet.Instantiate(position, direction, this);
+            }
         }
         // Shoots multiple bullets
         else
@@ -85,7 +159,15 @@ public class Shooter : MonoBehaviour
             direction = Quaternion.Euler(0, 0, startAngle) * direction;
             for (int i = 0; i < bulletsPerShot; i++)
             {
-                Bullet.Instantiate(position, direction, this);
+                if (trackingBullets)
+                {
+                    Missile.Instantiate(position, direction, this, trackInertia, target);
+                }
+                else
+                {
+                    Bullet.Instantiate(position, direction, this);
+                }
+                // Changes direction of next bullet
                 direction = Quaternion.Euler(0, 0, stepAngle) * direction;
             }
         }

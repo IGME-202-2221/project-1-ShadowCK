@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2904696995979354720
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1900832295952966415, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900832295952966415, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900832295952966415, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900832295952966415, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900832295952966415, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900832295952966415, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900832295952966415, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900832295952966415, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900832295952966415, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900832295952966415, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900832295952966415, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900832295952966415, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900832295952966415, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214357581322756512, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: shootMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214357581322756512, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: shootTimer
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214357581322756512, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: bulletSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214357581322756512, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: bulletDamage
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214357581322756512, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: bulletsSpread
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214357581322756512, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: shootInterval
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214357581322756512, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: bulletsPerShot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214357581322756512, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: shootDirection.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214357581322756512, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: shootDirection.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214357581322756512, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: alwaysTargetsPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214357581322756516, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: speed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214357581322756516, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: health
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214357581322756516, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: maxHealth
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214357581322756516, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: followsPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2576210297498427365, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: m_Name
+      value: Venom(Medium)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266214384072526340, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266214384072526340, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 77d995e9f63138d469e53b204c9f8af7, type: 3}
+    m_RemovedComponents:
+    - {fileID: 2214357581322756516, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+--- !u!1 &832892268370640261 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2576210297498427365, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+  m_PrefabInstance: {fileID: 2904696995979354720}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8277137344756120497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832892268370640261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1a6b60b7368b304bb0de1d52ec42f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2.5
+  health: 20
+  maxHealth: 20
+  direction: {x: 0, y: 0, z: 0}
+  cameraObject: {fileID: 0}
+  followsPlayer: 0
+  splitPrefab: {fileID: 832892268370640261, guid: a2a1b145a1b6cf3458f706b08d7140ba, type: 3}

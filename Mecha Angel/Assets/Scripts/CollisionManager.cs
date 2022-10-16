@@ -1,9 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class CollisionManager : MonoBehaviour
 {
@@ -70,7 +68,8 @@ public class CollisionManager : MonoBehaviour
         }
 
         // Process all collisions
-        foreach (CollidableObject collidable in collidableObjects)
+        // TODO: ToArray() is a bad way to deal with Concurrent modification!
+        foreach (CollidableObject collidable in collidableObjects.ToArray())
         {
             ProcessCollisions(collidable);
         }
@@ -151,16 +150,34 @@ public class CollisionManager : MonoBehaviour
     {
         Bullet bullet = collider.GetComponent<Bullet>();
         LivingEntity entity = other.GetComponent<LivingEntity>();
-        Shooter entityShooter = other.GetComponent<Shooter>(); // Can be null
 
         if (bullet != null && entity != null)
         {
-            if (!bullet.IsDead && entity is not Bullet && entityShooter != bullet.parent)
+            bool hasParent = bullet.HasParent;
+            LivingEntity parent = hasParent ? bullet.Parent.GetComponent<LivingEntity>() : null;
+            if (!bullet.IsDead
+                && (!hasParent || entity.gameObject != bullet.Parent.gameObject)
+                && LivingEntity.IsEnemy(parent != null ? parent : bullet, entity))
             {
-                entity.TakeDamage(bullet.bulletDamage);
-                bullet.Die();
+                if (entity is Bullet)
+                {
+                    Bullet entityBullet = entity as Bullet;
+                    if (bullet.Parent == null || entityBullet.Parent == null || LivingEntity.IsEnemy(bullet.Parent.GetComponent<LivingEntity>(), entityBullet.Parent.GetComponent<LivingEntity>()))
+                    {
+                        float bulletDmg = bullet.Health;
+                        float entityDmg = entity.Health;
+                        entity.TakeDamage(bulletDmg);
+                        bullet.TakeDamage(entityDmg);
+                    }
+                }
+                else
+                {
+                    entity.TakeDamage(bullet.bulletDamage);
+                    bullet.Die();
+                }
+
                 // Player's bullet hits meteor, awards score
-                if (bullet.parent.GetComponent<Player>() != null && entity is Meteor)
+                if (hasParent && bullet.Parent.GetComponent<Player>() != null && entity is Meteor)
                 {
                     Game.Instance.score += 1;
                 }

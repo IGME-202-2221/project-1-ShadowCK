@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Meteor : LivingEntity
@@ -12,10 +11,14 @@ public class Meteor : LivingEntity
     private CountdownTimer disorientTimer;
     private Coroutine disorientRoutine;
 
+    public float damage = 2f;
+    private CountdownTimer damageTimer;
+
     private void Start()
     {
         // Initial direction is towards the player
-        Vector2 dir = (Game.Instance.Player.transform.position - position).normalized;
+        Vector2 dir = (Vector2)(Game.Instance.Player.transform.position - position);
+        dir.Normalize();
         // Adds a random rotation less than +-90 degrees so it's not moving away
         dir = Quaternion.Euler(0, 0, Random.Range(-90f, 90f)) * dir;
         direction = dir;
@@ -29,6 +32,12 @@ public class Meteor : LivingEntity
         disorientTimer.Update(true);
 
         base.Update();
+
+        if (!destroyFlag && Game.IsOutOfBounds(this, Game.Instance.mainCamera))
+        {
+            destroyFlag = true;
+            Destroy(gameObject, 0.1f);
+        }
     }
 
     /// <summary>
@@ -54,5 +63,10 @@ public class Meteor : LivingEntity
             direction = Quaternion.Euler(0, 0, Time.deltaTime * degreesPerSecond) * direction;
             yield return null;
         }
+    }
+
+    public void Damage(LivingEntity other)
+    {
+        other.TakeDamage(damage);
     }
 }

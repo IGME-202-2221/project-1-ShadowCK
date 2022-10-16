@@ -40,8 +40,7 @@ public class CountdownTimer
     // --- Constructors ---
     public CountdownTimer(TimeSpan duration)
     {
-        Duration = duration;
-        Counter = new TimeSpan(0);
+        Reset(duration);
     }
 
     public CountdownTimer(int milliseconds)
@@ -76,5 +75,11 @@ public class CountdownTimer
     public void Restart()
     {
         Counter = new TimeSpan(0);
+    }
+
+    public void Reset(TimeSpan duration)
+    {
+        Duration = duration;
+        Restart();
     }
 }

@@ -103,6 +103,7 @@ MonoBehaviour:
   speed: 5
   health: 100
   maxHealth: 100
+  direction: {x: 0, y: 0, z: 0}
   cameraObject: {fileID: 0}
   mode: 0
 --- !u!114 &97119441
@@ -199,8 +200,14 @@ MonoBehaviour:
   isPlayer: 0
   p_canShoot: 0
   p_isShooting: 0
+  shootMode: 0
+  shootDirection: {x: 0, y: 0, z: 0}
   shootTimer: 0.2
   shootInterval: 0.2
+  bulletsPerShot: 1
+  bulletsSpread: 30
   bulletDamage: 10
   bulletSpeed: 20
   bulletColor: {r: 1, g: 1, b: 1, a: 1}
+  trackingBullets: 0
+  trackInertia: 1

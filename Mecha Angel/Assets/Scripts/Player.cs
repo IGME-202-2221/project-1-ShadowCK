@@ -58,7 +58,7 @@ public class Player : LivingEntity
         // If no rotation is applied, don't rotate the vehicle
         if (direction != Vector3.zero)
         {
-            transform.rotation = Quaternion.LookRotation(Vector3.back, direction);
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
         }
     }
 
@@ -105,6 +105,11 @@ public class Player : LivingEntity
     {
         float remainder = dividend % divisor;
         return remainder < 0 ? remainder + divisor : remainder;
+    }
 
+    public override void Die()
+    {
+        Game.Instance.GameOver();
+        base.Die();
     }
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8527062657642530216}
   - component: {fileID: 8527062657642530217}
+  - component: {fileID: 445902794}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -24,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8527062657642530215}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.3726076, y: -0.048698187, z: -9.934907}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -44,4 +45,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 851439f8ec4fd304eb8bc5c4ad5ca5a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
   bulletPrefab: {fileID: 3182272629599637876, guid: 64451874b5dddff4c9b613441cd5bb94, type: 3}
+  missilePrefab: {fileID: 3182272629599637876, guid: d8ef5f696d116044c8a4f0adbc8b8216, type: 3}
+--- !u!114 &445902794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8527062657642530215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b6dbcfcb8b65a04e984492f95cf2fa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpawnInterval: 10
+  meteorSpawnInterval: 3
+  enemyPrefabs:
+  - {fileID: 832892268370640261, guid: 0a5d77dc57f5c3543b54dd7c9571c8f6, type: 3}
+  - {fileID: 1985242538139724681, guid: 5a4c14bba32e4574b91109ec74fd450c, type: 3}
+  - {fileID: 3752886688213167624, guid: d52b959198745ca4baf7bd4ff1d3fc96, type: 3}
+  meteorPrefabs:
+  - {fileID: 2569622113833298982, guid: 6ac876f56d164d248a24aa7a556933e9, type: 3}
+  - {fileID: 6827282470967244644, guid: 85bb979b1f9bf4144a58a102687e3666, type: 3}
+  enemySpawnPoints: []
