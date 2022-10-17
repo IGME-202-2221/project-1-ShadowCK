@@ -139,10 +139,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1a6b60b7368b304bb0de1d52ec42f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
+  speed: 2.5
   health: 40
   maxHealth: 40
   direction: {x: 0, y: 0, z: 0}
   cameraObject: {fileID: 0}
   followsPlayer: 0
   splitPrefab: {fileID: 832892268370640261, guid: 89faad52167c81f4380c0da8604c99cc, type: 3}
+  splitNum: 2
+  spreadRange: {x: 0, y: 0.6}

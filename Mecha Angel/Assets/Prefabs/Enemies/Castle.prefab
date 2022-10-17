@@ -57,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2214357581322756512, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
       propertyPath: bulletSpeed
-      value: 3
+      value: 2.8
       objectReference: {fileID: 0}
     - target: {fileID: 2214357581322756512, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
       propertyPath: bulletDamage
@@ -65,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2214357581322756512, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
       propertyPath: trackInertia
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2214357581322756512, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
       propertyPath: bulletsSpread
@@ -84,12 +84,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2214357581322756516, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
+      propertyPath: speed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2214357581322756516, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
       propertyPath: health
-      value: 150
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 2214357581322756516, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
       propertyPath: maxHealth
-      value: 150
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 2214357581322756516, guid: 11bc7192d23f1d44e9de90b7972b9cf5, type: 3}
       propertyPath: followsPlayer

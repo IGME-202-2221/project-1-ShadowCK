@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 /// <summary>
 /// Stores accesible game assets
 /// </summary>
 public class Game : MonoBehaviour
 {
-    public float score = 0;
+    private float score = 0;
 
     // Prefabs and presets
     public GameObject bulletPrefab;
@@ -17,9 +19,11 @@ public class Game : MonoBehaviour
 
     public TextMesh info;
 
-    public static Game Instance
+    public static Game instance;
+
+    public float Score
     {
-        get; private set;
+        get => score;
     }
 
     public Player Player
@@ -31,6 +35,8 @@ public class Game : MonoBehaviour
     {
         public Camera instance;
         public float width, height, left, right, top, bottom;
+
+        public Vector3 Center => instance.transform.position;
 
         public CameraSettings()
         {
@@ -79,13 +85,13 @@ public class Game : MonoBehaviour
     private void Awake()
     {
         // Game is singleton
-        if (Instance != null)
+        if (instance != null)
         {
             Destroy(this);
         }
         else
         {
-            Instance = this;
+            instance = this;
             // Initializes basic game data
             Application.targetFrameRate = 144;
             Player = GetComponent<Player>("Player");
@@ -93,10 +99,30 @@ public class Game : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         // Updates camera
         mainCamera.Update();
+    }
+
+    public void AddScore(float points)
+    {
+        score += points;
+        if (score < 0) score = 0;
+    }
+
+    public void GameOver()
+    {
+        Time.timeScale = 0.2f;
+        info.text = "Game Over!";
+        HUDManager.instance.replayCanvas.SetActive(value: true);
+    }
+
+    public void Restart(float newTimeScale = 1f)
+    {
+        Time.timeScale = newTimeScale;
+        HUDManager.instance.replayCanvas.SetActive(value: false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     /// <summary>
@@ -140,15 +166,10 @@ public class Game : MonoBehaviour
         return objPos.x < camera.left || objPos.x > camera.right || objPos.y < camera.bottom || objPos.y > camera.top;
     }
 
-    public void GameOver()
+    public static bool IsValid(MonoBehaviour component)
     {
-        // TODO: Has some error
-        //List<CollidableObject> collidables = CollisionManager.instance.collidableObjects;
-        //for (int i = 0; i < collidables.Count; i++)
-        //{
-        //    DestroyImmediate(collidables[i]);
-        //}
-        //DestroyImmediate(CollisionManager.instance);
-        info.text = "Game Over!";
+        return component != null
+            && !component.gameObject.IsDestroyed()
+            && !component.IsDestroyed();
     }
 }
